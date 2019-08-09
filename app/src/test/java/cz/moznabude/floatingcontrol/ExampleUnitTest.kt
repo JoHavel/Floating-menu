@@ -1,4 +1,4 @@
-package cz.moznabude.vzor
+package cz.moznabude.floatingcontrol
 
 import org.junit.Test
 

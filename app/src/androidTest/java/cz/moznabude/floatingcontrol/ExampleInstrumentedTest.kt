@@ -1,4 +1,4 @@
-package cz.moznabude.vzor
+package cz.moznabude.floatingcontrol
 
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("cz.moznabude.vzor", appContext.packageName)
+        assertEquals("cz.moznabude.floatingcontrol", appContext.packageName)
     }
 }

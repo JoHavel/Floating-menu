@@ -20,6 +20,10 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -27,6 +31,8 @@ dependencies {
     implementation("org.jetbrains.kotlin", "kotlin-stdlib-jdk7", embeddedKotlinVersion)
     implementation("androidx.appcompat", "appcompat", "1.1.0-rc01")
     implementation("androidx.core", "core-ktx", "1.2.0-alpha02")
+    implementation("androidx.constraintlayout", "constraintlayout", "1.1.3")
+    implementation("androidx.appcompat", "appcompat", "1.1.0-rc01")
     implementation("androidx.constraintlayout", "constraintlayout", "1.1.3")
     testImplementation("junit", "junit", "4.12")
     androidTestImplementation("androidx.test", "runner", "1.3.0-alpha02")
