@@ -7,16 +7,23 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.math.abs
+import kotlin.math.sign
 
 class MainActivity : AppCompatActivity() {
 
     private val handlerOfLongTouch = Handler()
     private var isActive = false
+    private var isOpened = false
+    private lateinit var menu: MenuView
     private val runnable = Runnable {
         Toast.makeText(applicationContext, "pressed once", Toast.LENGTH_SHORT).show()
         isActive = false
         println(c.x - f.x)
         println(c.y - f.y)
+        menu.appear()
+        menu.x = c.x - menu.width/2
+        menu.y = c.y - menu.height/2
+        isOpened = true
     }
 
     private val f = Coordinates(0f, 0f)
@@ -26,6 +33,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        menu = floating_menu
+        menu.x = -Float.MAX_VALUE
+        menu.y = -Float.MAX_VALUE
 
         //screenSize = Coordinates(screen.width.toFloat(), screen.height.toFloat())
 
@@ -53,9 +63,27 @@ class MainActivity : AppCompatActivity() {
                     stop()
                 }
             }
+
+            if (event.actionMasked == MotionEvent.ACTION_UP && isOpened) {
+                menu.disappear()
+                isOpened = false
+                c.x = event.x
+                c.y = event.y
+                val direction = (c.y - f.y) / (c.x - f.x)
+                if(sign(c.x-f.x) > 0) {
+                    when(direction) {
+                        in (-0.5f).rangeTo(0.5f) -> println("next")
+                        else -> println("Error")
+                    }
+                } else {
+
+                }
+            }
             true
         }
     }
+
+
 }
 
 private data class Coordinates(var x: Float, var y: Float)

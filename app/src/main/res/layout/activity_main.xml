@@ -9,4 +9,11 @@
         android:focusable="true"
         android:id="@+id/screen">
 
+    <cz.moznabude.floatingcontrol.MenuView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/floating_menu">
+
+    </cz.moznabude.floatingcontrol.MenuView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
