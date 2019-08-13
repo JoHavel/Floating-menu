@@ -6,22 +6,24 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.GridLayout
 import kotlin.math.abs
-import kotlin.math.sign
 
-class MenuView: GridLayout {
+abstract class MenuView <T: MenuView.Directions>: GridLayout {
 
     private var isActive = false
     private var isOpened = false
     private val f = Coordinates(0f, 0f)
     private val c = Coordinates(0f, 0f)
 
+    abstract val buttons: Map<T, MenuButton>
+
     private val handlerOfLongTouch = Handler()
     private val runnable = Runnable {
         isActive = false
-        println(c.x - f.x)
-        println(c.y - f.y)
+        println(c-f)
+        println(c-f)
         appear()
         x = c.x - width/2
         y = c.y - height/2
@@ -29,7 +31,7 @@ class MenuView: GridLayout {
     }
 
     init {
-        View.inflate(context, R.layout.menu, this)
+        this.setMenuLayout()
         x = -Float.MAX_VALUE
         y = -Float.MAX_VALUE
     }
@@ -37,16 +39,17 @@ class MenuView: GridLayout {
     constructor(context: Context): super(context)
     constructor(context: Context, attrs: AttributeSet?): super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): super(context, attrs, defStyleAttr)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int): super(context, attrs, defStyleAttr, defStyleRes)
-
-
-    private fun disappear() { this.visibility = View.GONE }
-    private fun appear() { this.visibility = View.VISIBLE }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         setListener()
     }
+
+    abstract fun setMenuLayout()
+    abstract fun getDirection(coordinates: Coordinates): T?
+
+    private fun disappear() { this.visibility = View.GONE }
+    private fun appear() { this.visibility = View.VISIBLE }
 
     private fun setListener() {
         (parent as ViewGroup).setOnTouchListener { _, event ->
@@ -79,19 +82,20 @@ class MenuView: GridLayout {
                 isOpened = false
                 c.x = event.x
                 c.y = event.y
-                val direction = (c.y - f.y) / (c.x - f.x)
-                if(sign(c.x-f.x) > 0) {
-                    when(direction) {
-                        in (-0.5f).rangeTo(0.5f) -> println("next")
-                        else -> println("Error")
-                    }
-                } else {
-
-                }
+                buttons[getDirection(c-f)]?.function?.invoke()
             }
             true
         }
     }
 
-    private data class Coordinates(var x: Float, var y: Float)
+    data class Coordinates(var x: Float, var y: Float) {
+        operator fun minus(other: Coordinates): Coordinates = Coordinates(x-other.x, y-other.y)
+        operator fun minusAssign(other: Coordinates) {
+            x -= other.x
+            y -= other.y
+        }
+    }
+    data class MenuButton(val button: Button, val function: (() -> Unit))
+
+    interface Directions
 }
