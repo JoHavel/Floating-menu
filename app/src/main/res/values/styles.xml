@@ -8,14 +8,4 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="RoundButton" parent="Widget.AppCompat.Button">
-        <item name="android:layout_width">@dimen/round_button_size</item>
-        <item name="android:layout_height">@dimen/round_button_size</item>
-        <item name="android:background">@drawable/rounded_button</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:layout_margin">@dimen/round_button_margin</item>
-        <item name="android:clickable">false</item>
-        <item name="android:focusable">false</item>
-    </style>
-
 </resources>

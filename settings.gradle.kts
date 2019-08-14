@@ -1,1 +1,2 @@
+include(":floatingmenu")
 include(":app")

@@ -2,6 +2,7 @@ package cz.moznabude.floatingcontrol
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import cz.moznabude.floatingmenu.BasicMenuView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

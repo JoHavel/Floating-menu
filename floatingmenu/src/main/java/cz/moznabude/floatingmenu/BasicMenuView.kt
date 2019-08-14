@@ -1,7 +1,6 @@
-package cz.moznabude.floatingcontrol
+package cz.moznabude.floatingmenu
 
 import android.content.Context
-import android.os.Debug
 import android.util.AttributeSet
 import android.view.View
 import kotlinx.android.synthetic.main.menu.view.*

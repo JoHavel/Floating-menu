@@ -1,4 +1,4 @@
-package cz.moznabude.floatingcontrol
+package cz.moznabude.floatingmenu
 
 import android.content.Context
 import android.util.AttributeSet
@@ -9,7 +9,7 @@ abstract class EnumMenuView<T>: MenuView<T> where T: Enum<T>, T: EnumMenuView.En
 
     private val clazz: Class<T>
 
-    override fun getDirection(coordinates: Coordinates): T? = clazz.enumConstants.first { it.isInCoordinates(coordinates) }
+    override fun getDirection(coordinates: Coordinates): T? = clazz.enumConstants!!.first { it.isInCoordinates(coordinates) }
 
     constructor(clazz: Class<T>, context: Context): super(context) {
         this.clazz = clazz

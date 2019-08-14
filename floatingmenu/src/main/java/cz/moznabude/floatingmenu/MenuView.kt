@@ -1,4 +1,4 @@
-package cz.moznabude.floatingcontrol
+package cz.moznabude.floatingmenu
 
 import android.content.Context
 import android.os.Handler
@@ -98,7 +98,8 @@ abstract class MenuView <T: MenuView.Directions>: GridLayout {
     }
 
     data class Coordinates(var x: Float, var y: Float) {
-        operator fun minus(other: Coordinates): Coordinates = Coordinates(x-other.x, y-other.y)
+        operator fun minus(other: Coordinates): Coordinates =
+            Coordinates(x - other.x, y - other.y)
         operator fun minusAssign(other: Coordinates) {
             x -= other.x
             y -= other.y

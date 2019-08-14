@@ -9,11 +9,11 @@
         android:focusable="true"
         android:id="@+id/screen">
 
-    <cz.moznabude.floatingcontrol.BasicMenuView
+    <cz.moznabude.floatingmenu.BasicMenuView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/floating_menu">
 
-    </cz.moznabude.floatingcontrol.BasicMenuView>
+    </cz.moznabude.floatingmenu.BasicMenuView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
