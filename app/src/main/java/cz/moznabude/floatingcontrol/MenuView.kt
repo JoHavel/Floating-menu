@@ -31,7 +31,6 @@ abstract class MenuView <T: MenuView.Directions>: GridLayout {
     }
 
     init {
-        this.setMenuLayout()
         x = -Float.MAX_VALUE
         y = -Float.MAX_VALUE
     }
@@ -88,6 +87,16 @@ abstract class MenuView <T: MenuView.Directions>: GridLayout {
         }
     }
 
+    private fun getMenuButton(direction: Directions): MenuButton = buttons[direction] ?: throw Exception("No such direction")
+
+    fun setText(direction: Directions, text: String) {
+        getMenuButton(direction).button.text = text
+    }
+
+    fun setFunction(direction: Directions, function: (() -> Unit)) {
+        getMenuButton(direction).function = function
+    }
+
     data class Coordinates(var x: Float, var y: Float) {
         operator fun minus(other: Coordinates): Coordinates = Coordinates(x-other.x, y-other.y)
         operator fun minusAssign(other: Coordinates) {
@@ -95,7 +104,7 @@ abstract class MenuView <T: MenuView.Directions>: GridLayout {
             y -= other.y
         }
     }
-    data class MenuButton(val button: Button, val function: (() -> Unit))
+    data class MenuButton(val button: Button, var function: (() -> Unit))
 
     interface Directions
 }

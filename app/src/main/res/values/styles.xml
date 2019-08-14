@@ -16,7 +16,6 @@
         <item name="android:layout_margin">@dimen/round_button_margin</item>
         <item name="android:clickable">false</item>
         <item name="android:focusable">false</item>
-        <item name="android:text">Tlačítko</item>
     </style>
 
 </resources>
