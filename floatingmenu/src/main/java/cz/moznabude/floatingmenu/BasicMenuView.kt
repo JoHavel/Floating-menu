@@ -16,14 +16,14 @@ class BasicMenuView: EnumMenuView<BasicMenuView.BasicDirections> {
 
     override fun setMenuLayout() {
         View.inflate(context, R.layout.menu, this)
-        buttons[BasicDirections.Right] = MenuButton(right_button) {}
-        buttons[BasicDirections.TopRight] = MenuButton(top_right) {}
-        buttons[BasicDirections.Top] = MenuButton(top_button) {}
-        buttons[BasicDirections.TopLeft] = MenuButton(top_left) {}
-        buttons[BasicDirections.Left] = MenuButton(left_button) {}
-        buttons[BasicDirections.BottomLeft] = MenuButton(bottom_left) {}
-        buttons[BasicDirections.Bottom] = MenuButton(bottom_button) {}
-        buttons[BasicDirections.BottomRight] = MenuButton(bottom_right) {}
+        buttons[BasicDirections.Right] = MenuButton(right_button)
+        buttons[BasicDirections.TopRight] = MenuButton(top_right)
+        buttons[BasicDirections.Top] = MenuButton(top_button)
+        buttons[BasicDirections.TopLeft] = MenuButton(top_left)
+        buttons[BasicDirections.Left] = MenuButton(left_button)
+        buttons[BasicDirections.BottomLeft] = MenuButton(bottom_left)
+        buttons[BasicDirections.Bottom] = MenuButton(bottom_button)
+        buttons[BasicDirections.BottomRight] = MenuButton(bottom_right)
     }
 
     fun example() {

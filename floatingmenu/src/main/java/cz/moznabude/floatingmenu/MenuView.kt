@@ -31,8 +31,7 @@ abstract class MenuView <T: MenuView.Directions>: GridLayout {
     }
 
     init {
-        x = -Float.MAX_VALUE
-        y = -Float.MAX_VALUE
+        disappear()
     }
 
     constructor(context: Context): super(context)
@@ -47,7 +46,7 @@ abstract class MenuView <T: MenuView.Directions>: GridLayout {
     abstract fun setMenuLayout()
     abstract fun getDirection(coordinates: Coordinates): T?
 
-    private fun disappear() { this.visibility = View.GONE }
+    private fun disappear() { this.visibility = View.INVISIBLE }
     private fun appear() { this.visibility = View.VISIBLE }
 
     private fun setListener() {
@@ -93,8 +92,12 @@ abstract class MenuView <T: MenuView.Directions>: GridLayout {
         getMenuButton(direction).button.text = text
     }
 
-    fun setFunction(direction: Directions, function: (() -> Unit)) {
+    fun setFunction(direction: Directions, function: (() -> Unit)?) {
         getMenuButton(direction).function = function
+    }
+
+    fun disableButton(direction: Directions) {
+        setFunction(direction, null)
     }
 
     data class Coordinates(var x: Float, var y: Float) {
@@ -105,7 +108,25 @@ abstract class MenuView <T: MenuView.Directions>: GridLayout {
             y -= other.y
         }
     }
-    data class MenuButton(val button: Button, var function: (() -> Unit))
+    class MenuButton(val button: Button) {
+        var function: (() -> Unit)? = null
+            set(value) {
+                if (value == null) {
+                    button.visibility = View.INVISIBLE
+                } else {
+                    button.visibility = View.VISIBLE
+                }
+                field = value
+            }
+
+        init {
+            button.visibility = View.INVISIBLE
+        }
+
+        constructor(button: Button, function: (() -> Unit)?) : this(button) {
+            this.function = function
+        }
+    }
 
     interface Directions
 }
