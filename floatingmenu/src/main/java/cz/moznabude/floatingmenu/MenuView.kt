@@ -12,6 +12,7 @@ import kotlin.math.abs
 
 abstract class MenuView <T: MenuView.Directions>: GridLayout {
 
+    var longTouchLength = 1000L
     private var isActive = false
     private var isOpened = false
     private val f = Coordinates(0f, 0f)
@@ -22,8 +23,6 @@ abstract class MenuView <T: MenuView.Directions>: GridLayout {
     private val handlerOfLongTouch = Handler()
     private val runnable = Runnable {
         isActive = false
-        println(c-f)
-        println(c-f)
         appear()
         x = c.x - width/2
         y = c.y - height/2
@@ -53,7 +52,7 @@ abstract class MenuView <T: MenuView.Directions>: GridLayout {
         (parent as ViewGroup).setOnTouchListener { _, event ->
             if (event.actionMasked == MotionEvent.ACTION_DOWN) {
                 isActive = true
-                handlerOfLongTouch.postDelayed(runnable, 1000)
+                handlerOfLongTouch.postDelayed(runnable, longTouchLength)
                 f.x = event.x
                 f.y = event.y
             }
@@ -82,7 +81,7 @@ abstract class MenuView <T: MenuView.Directions>: GridLayout {
                 c.y = event.y
                 buttons[getDirection(c-f)]?.function?.invoke()
             }
-            true
+            isOpened
         }
     }
 
